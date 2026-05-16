@@ -2,6 +2,10 @@ name: devsecops-infra-pipeline
 on: push
 jobs:
   devsecops-infra:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      #actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     runs-on: ubuntu-latest
     steps:
       - name: clone-the-repo
@@ -27,11 +31,11 @@ jobs:
         with:
           sarif_file: results.sarif
           
-   #   - name: upload-artifact
-   #     uses: actions/upload-artifact@v7
-   #     with:
-   #       artifact:
-   #       path: results.sarif
+      - name: upload-artifact
+        uses: actions/upload-artifact@v7
+        with:
+          artifact:
+          path: results.sarif
 
       - name: setup-terraform
         uses: hashicorp/setup-terraform@v4
