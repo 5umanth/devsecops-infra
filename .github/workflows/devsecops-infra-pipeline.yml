@@ -31,11 +31,11 @@ jobs:
         with:
           sarif_file: results.sarif
           
-      - name: upload-artifact
-        uses: actions/upload-artifact@v7
-        with:
-          artifact:
-          path: results.sarif
+      #- name: upload-artifact
+        #uses: actions/upload-artifact@v7
+        #with:
+          #artifact:
+          #path: results.sarif
 
       - name: setup-terraform
         uses: hashicorp/setup-terraform@v4
